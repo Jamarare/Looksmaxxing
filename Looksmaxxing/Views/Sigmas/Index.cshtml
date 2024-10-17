@@ -1,1 +1,36 @@
-﻿
+﻿@model IEnumerable<Looksmaxxing.Models.Sigmas.SigmaIndexViewModel>
+
+    @{ int rowNumber = 1; }
+    <div><a asp-action="Add" asp-controller="Sigmas" type="submit" class="btn btn-primary">Go on mission to get new Sigma</a></div>
+    @* User can go on mission using ADD function, to obtain a new Sigma. In controller, this is called "PlayerSolorMission *@
+
+    <div class="h1">Your Sigmas:</div>
+    <form method="post">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    @* Later, once images have been implemented, add image here aswell*@
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var sigma in Model)
+            {
+               <tr>
+                   @* Later, once images have been implemented, add image here aswell*@
+                   <td>@rowNumber</td>
+                   <td>@sigma.SigmaName</td>
+                   <td>@sigma.SigmaType</td>
+                    <td>@sigma.SigmaLevel</td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+        </table>
+    </form>
+    @* Missing button for player profile *@
+    @* Missing button for solar system page *@
+    @* Missing button for player activity history*@

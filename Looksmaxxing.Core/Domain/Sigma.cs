@@ -27,8 +27,6 @@ namespace Looksmaxxing.Core.Domain
         public SigmaType SigmaType { get; set; }
         public int SigmaMovePower { get; set; }
         public int SigmaMove {  get; set; }
-        public int SigmaMove2Power { get; set; }
-        public int SigmaMove2 { get; set; }
         public int SpecialSigmaMovePower { get; set; }
         public int SpecialSigmaMove { get; set; }
         public DateTime SigmaWasBorn { get; set; }
