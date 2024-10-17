@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Looksmaxxing.Data\Looksmaxxing.Data.csproj" />
+  </ItemGroup>
+
 </Project>

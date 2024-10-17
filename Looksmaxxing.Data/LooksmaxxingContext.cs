@@ -10,6 +10,7 @@ namespace Looksmaxxing.Data
 {
     public class LooksmaxxingContext : DbContext
     {
+        public LooksmaxxingContext(DbContextOptions<LooksmaxxingContext> options) : base(options) {}
         public DbSet<Sigma> Sigmas { get; set; }
     }
 }
