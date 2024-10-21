@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace Looksmaxxing.Core.Dto
 {
-    public class SigmaDto
-    {
 
-    }
 
     public enum SigmaType
     {
@@ -21,7 +19,7 @@ namespace Looksmaxxing.Core.Dto
         Dead, Alive, Looksmaxxing
     }
 
-    public class SigmaIndexViewModel
+    public class SigmaDto
     {
         public Guid Id { get; set; }
 
@@ -37,8 +35,8 @@ namespace Looksmaxxing.Core.Dto
         public DateTime SigmaWasBorn { get; set; }
         public DateTime SigmaDied { get; set; }
 
-        //public List<IFormFile> Files { get; set; }
-        //public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
 
         //db only
         public DateTime CreatedAt { get; set; }
