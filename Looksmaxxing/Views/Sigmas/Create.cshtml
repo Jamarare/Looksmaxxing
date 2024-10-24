@@ -1,0 +1,91 @@
+﻿@model Looksmaxxing.Models.Sigmas.SigmaCreateViewModel
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="UpdatedAt" type="hidden" />
+        <input asp-for="SigmaXP" value="0" type="hidden" />
+        <input asp-for="SigmaLevel" value="0" type="hidden" />
+        <input asp-for="SigmaXPNextLevel" value="100" type="hidden" />
+        <input asp-for="SigmaStatus" value="Alive" type="hidden" />
+        <input asp-for="SigmaWasBorn" value="Alive" type="hidden" />
+
+        <div class="form-group-row">
+            <label asp-for="SigmaName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="SigmaName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="SigmaType" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="SigmaType" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="SigmaMove" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="SigmaMove" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group-row">
+             <label asp-for="SigmaMovePower" class="col-sm-2 col-form-label"></label>
+             <div class="col-sm-10">
+                 <input asp-for="SigmaMovePower" class="form-control" />
+             </div>
+        </div>
+
+        <div class="form-group-row">
+             <label asp-for="SpecialSigmaMove" class="col-sm-2 col-form-label"></label>
+             <div class="col-sm-10">
+                 <input asp-for="SpecialSigmaMove" class="form-control" />
+             </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="SpecialSigmaMovePower" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="SpecialSigmaMovePower" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group-row">
+            <label asp-for="Files" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-5">
+                <div class="custom-file">
+                    <input 
+                        class="form-control custom-file-input" 
+                        asp-for="Files"
+                        multiple type="file"
+                     />
+                     <label class="custom-file-label">Choose Images from device -></label>
+                </div>
+            </div>
+        </div>
+
+        <a asp-action="create" asp-controller="sigmas" type="submit"
+         class="btn btn-primary" value="Make Sigma"></a>
+         <a asp-action="index" class="btn btn-primary">Cancel</a>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-input');
+                var files = $(this)[0].files;
+                if (files.lenght > 1) {
+                    fileLabel.html(files.lenght + ' files selected');
+                }
+                else if (files.lenght == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });           
+        });        
+    </script>
+}

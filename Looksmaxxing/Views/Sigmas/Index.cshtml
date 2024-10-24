@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<Looksmaxxing.Models.Sigmas.SigmaIndexViewModel>
 
     @{ int rowNumber = 1; }
-    <div><a asp-action="Add" asp-controller="Sigmas" type="submit" class="btn btn-primary">Go on mission to get new Sigma</a></div>
-    @* User can go on mission using ADD function, to obtain a new Sigma. In controller, this is called "PlayerSolorMission *@
+    <div>
+        <a asp-action="Add" asp-controller="Sigmas" type="submit" class="btn btn-primary">Go on mission to get new Sigma</a>
+    </div>
+    
 
     <div class="h1">Your Sigmas:</div>
     <form method="post">
