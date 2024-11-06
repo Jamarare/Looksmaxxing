@@ -31,7 +31,7 @@ namespace Looksmaxxing.Controllers
                 {
                     Id = x.Id,
                     SigmaName = x.SigmaName,
-                    SigmaType = (SigmaType)x.SigmaType,
+                    SigmaType = (Models.Sigmas.SigmaType)(Core.Dto.SigmaType)x.SigmaType,
                     SigmaLevel = x.SigmaLevel,
                 });
             return View(resultingInventory);
@@ -61,7 +61,7 @@ namespace Looksmaxxing.Controllers
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 Files = vm.Files,
-                Image = vm.Image,
+                Image = vm.Image
                 .Select(x => new FileToDatabaseDto
                  {
                     ID = x.ImageID,
@@ -77,7 +77,7 @@ namespace Looksmaxxing.Controllers
                 return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", vm);
         }
     }
 }

@@ -8,7 +8,7 @@
         <input asp-for="SigmaLevel" value="0" type="hidden" />
         <input asp-for="SigmaXPNextLevel" value="100" type="hidden" />
         <input asp-for="SigmaStatus" value="Alive" type="hidden" />
-        <input asp-for="SigmaWasBorn" value="Alive" type="hidden" />
+        <input asp-for="SigmaWasBorn" value="Alive" type="hidden" />+
 
         <div class="form-group-row">
             <label asp-for="SigmaName" class="col-sm-2 col-form-label"></label>
@@ -67,7 +67,7 @@
         </div>
 
         <a asp-action="create" asp-controller="sigmas" type="submit"
-         class="btn btn-primary" value="Make Sigma"></a>
+         class="btn btn-primary" value="Create">Create Sigma</a>
          <a asp-action="index" class="btn btn-primary">Cancel</a>
 
     </form>

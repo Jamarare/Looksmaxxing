@@ -25,10 +25,11 @@ namespace Looksmaxxing.Core.Domain
         public int SigmaXPNextLevel { get; set; }
         public int SigmaLevel { get; set; }
         public SigmaType SigmaType { get; set; }
+        public SigmaStatus SigmaStatus { get; set; }
         public int SigmaMovePower { get; set; }
-        public int SigmaMove {  get; set; }
+        public string SigmaMove {  get; set; }
         public int SpecialSigmaMovePower { get; set; }
-        public int SpecialSigmaMove { get; set; }
+        public string SpecialSigmaMove { get; set; }
         public DateTime SigmaWasBorn { get; set; }
         public DateTime SigmaDied { get; set; }
 

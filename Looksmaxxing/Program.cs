@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISigmasServices, SigmasServices>();
+builder.Services.AddScoped<IFileServices, FileServices>();
 
 builder.Services.AddDbContext<LooksmaxxingContext>(
     Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
