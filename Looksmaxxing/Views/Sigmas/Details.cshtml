@@ -1,9 +1,11 @@
-﻿@model Looksmaxxing.Models.Sigmas.SigmaDetailsViewModel
+﻿
+@model Looksmaxxing.Models.Sigmas.SigmaDetailsViewModel
+
 
 <h1> @Html.DisplayFor(model => model.SigmaName) </h1>
 
 <div>
-    <h4> My lord, super Sigma, be ready to mew: </h4>
+    <h4> Super Sigma, be ready to mew: </h4>
     <hr />
     <dl class="row">
         <div class="form-group row">
@@ -15,6 +17,7 @@
             <label asp-for="SigmaName" class="col-sm-2 col-form-label"></label>
             @Html.DisplayFor(model => model.SigmaName)
         </div>
+
         <div id="imagediv">
         @foreach (var image in Model.Image)
         {

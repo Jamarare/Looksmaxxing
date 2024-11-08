@@ -66,5 +66,41 @@ namespace Looksmaxxing.ApplicationServices.Services
 
             return sigma;
         }
+
+        public async Task<Sigma> Update(SigmaDto dto)
+        {
+            Sigma sigma = new Sigma();
+
+            sigma.Id = dto.Id;
+            sigma.SigmaXP = dto.SigmaXP;
+            sigma.SigmaXPNextLevel = dto.SigmaXPNextLevel;
+            sigma.SigmaLevel = dto.SigmaLevel;
+            sigma.SigmaStatus = (Core.Domain.SigmaStatus)dto.SigmaStatus;
+            sigma.SigmaWasBorn = dto.SigmaWasBorn;
+            sigma.SigmaDied = (DateTime)dto.SigmaDied;
+
+            //set by user
+            sigma.SigmaName = dto.SigmaName;
+            sigma.SigmaType = (Core.Domain.SigmaType)dto.SigmaType;
+            sigma.SigmaMove = dto.SigmaMove;
+            sigma.SigmaMovePower = dto.SigmaMovePower;
+            sigma.SpecialSigmaMove = dto.SpecialSigmaMove;
+            sigma.SpecialSigmaMovePower = dto.SpecialSigmaMovePower;
+
+            //set for db
+            sigma.CreatedAt = DateTime.Now;
+            sigma.UpdatedAt = DateTime.Now;
+
+            //files
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, sigma);
+            }
+
+            _context.Sigmas.Update(sigma);
+            await _context.SaveChangesAsync();
+
+            return sigma;
+        }
     }
 }

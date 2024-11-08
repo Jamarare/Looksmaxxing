@@ -12,6 +12,7 @@ namespace Looksmaxxing.Core.ServiceInterface
     {
         Task<Sigma> DetailsAsync(Guid id);
 
-        Task<Sigma> Create(SigmaDto dto);    
+        Task<Sigma> Create(SigmaDto dto);
+        Task<Sigma> Update(SigmaDto dto);
     }
 }
