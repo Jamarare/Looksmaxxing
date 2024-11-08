@@ -19,6 +19,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Type</th>
                     <th scope="col">Level</th>
+                    <th scope="col">Admin Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +30,10 @@
                    <td>@rowNumber</td>
                    <td>@sigma.SigmaName</td>
                    <td>@sigma.SigmaType</td>
-                    <td>@sigma.SigmaLevel</td>
+                   <td>@sigma.SigmaLevel</td>
+                   <td>
+                       <a asp-action="details" asp-controller="sigmas" asp-route-id="@sigma.Id" class="btn btn-info">SigmaDetails</a>
+                   </td>
                 </tr>
                 rowNumber++;
             }

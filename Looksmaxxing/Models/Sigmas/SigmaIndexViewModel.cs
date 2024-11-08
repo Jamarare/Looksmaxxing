@@ -12,7 +12,7 @@
 
     public class SigmaIndexViewModel
     {
-       public Guid Id { get; set; }
+       public Guid? Id { get; set; }
 
        public string SigmaName { get; set; }
        public int SigmaXP { get; set; }

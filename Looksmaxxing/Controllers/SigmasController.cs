@@ -4,6 +4,7 @@ using Looksmaxxing.Models.Sigmas;
 using Microsoft.AspNetCore.Mvc;
 using Looksmaxxing.ApplicationServices.Services;
 using Looksmaxxing.Core.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace Looksmaxxing.Controllers
 {
@@ -79,6 +80,42 @@ namespace Looksmaxxing.Controllers
             }
 
             return RedirectToAction("Index", vm);
+        }
+
+        public async Task<IActionResult> Details(Guid id /*, Guid ref*/)
+        {
+            var sigma = await _sigmasServices.DetailsAsync(id);
+
+            if (sigma == null)
+            {
+                return NotFound(); // <- TODO; custom partial view with message, sigma is not located
+            }
+
+            var images = await _context.FilesToDatabase
+                .Where(s => s.SigmaID == id)
+                .Select( y => new SigmaImageViewModel
+                {
+                    SigmaID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
+            var vm = new SigmaDetailsViewModel();
+            vm.Id = sigma.Id;
+            vm.SigmaName = sigma.SigmaName;
+            vm.SigmaXP = sigma.SigmaXP;
+            vm.SigmaLevel = sigma.SigmaLevel;
+            vm.SigmaType = (Models.Sigmas.SigmaType)sigma.SigmaType;
+            vm.SigmaStatus = (Models.Sigmas.SigmaStatus)sigma.SigmaStatus;
+            vm.SigmaMove = sigma.SigmaMove;
+            vm.SigmaMovePower = sigma.SigmaMovePower;
+            vm.SpecialSigmaMove = sigma.SpecialSigmaMove;
+            vm.SpecialSigmaMovePower = sigma.SpecialSigmaMovePower;
+            vm.Image.AddRange(images);
+
+            return View(vm); 
         }
     }
 }
