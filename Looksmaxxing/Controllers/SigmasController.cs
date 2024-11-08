@@ -42,7 +42,8 @@ namespace Looksmaxxing.Controllers
             SigmaCreateViewModel vm = new();
             return View("Create",vm);
         }
-        [HttpPost]
+        [HttpPost , ActionName("Create")] 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SigmaCreateViewModel vm)
         {
             var dto = new SigmaDto()

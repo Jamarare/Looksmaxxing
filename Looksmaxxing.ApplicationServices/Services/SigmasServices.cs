@@ -44,6 +44,7 @@ namespace Looksmaxxing.ApplicationServices.Services
             sigma.SigmaDied = DateTime.Parse("01/01/9999, 00:00:00");
 
             //set by user
+            sigma.SigmaName = dto.SigmaName;
             sigma.SigmaType = (Core.Domain.SigmaType)dto.SigmaType;
             sigma.SigmaMove = dto.SigmaMove;
             sigma.SigmaMovePower = dto.SigmaMovePower;
