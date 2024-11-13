@@ -1,0 +1,67 @@
+﻿@model Looksmaxxing.Models.Sigmas.SigmaDeleteViewModel
+
+<h1> @Html.DisplayFor(model => model.SigmaName) </h1>
+
+<div>
+    <h4> Super Sigma, be ready to mew: </h4>
+    <hr />
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Id)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SigmaName" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaName)
+        </div>
+
+        <div id="imagediv">
+            @foreach (var image in Model.Image)
+            {
+                <partial name="_Images" model="image" />
+            }
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SigmaLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaLevel)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SigmaXP" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaXP)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SigmaXPNextLevel" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaXPNextLevel)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SigmaStatus" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaStatus)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SigmaMove" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaMove)
+            <label asp-for="SigmaMovePower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SigmaMovePower)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="SpecialSigmaMove" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.SpecialSigmaMove)
+            <label asp-for="SpecialSigmaMovePower" class="col-sm-2-col form-label"></label>
+            @Html.DisplayFor(model => model.SpecialSigmaMovePower)
+        </div>
+    </dl>
+    <form asp-action="DeleteConfirmation">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="index" asp-controller="sigmas" class="btn btn-secondary">Index</a>
+    </form>
+
+
+</div>

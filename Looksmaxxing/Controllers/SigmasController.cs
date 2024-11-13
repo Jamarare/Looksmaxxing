@@ -16,11 +16,13 @@ namespace Looksmaxxing.Controllers
 
         private readonly LooksmaxxingContext _context;
         private readonly ISigmasServices _sigmasServices;
+        private readonly IFileServices _fileServices;
 
-        public SigmasController(LooksmaxxingContext context, ISigmasServices sigmasServices)
+        public SigmasController(LooksmaxxingContext context, ISigmasServices sigmasServices, IFileServices fileServices)
         {
             _context = context;
             _sigmasServices = sigmasServices;
+            _fileServices = fileServices;
         }
 
         [HttpGet]
@@ -191,6 +193,68 @@ namespace Looksmaxxing.Controllers
 
             if (result == null) { return RedirectToAction("Index"); }
             return RedirectToAction("Index", vm);
+        }
+        [HttpGet]
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == null) { return NotFound(); }
+
+            var sigma = await _sigmasServices.DetailsAsync(id);
+
+            if (sigma == null) { return NotFound(); };
+
+            var images = await _context.FilesToDatabase
+                .Where(x => x.SigmaID == id)
+                .Select( y => new SigmaImageViewModel
+                {
+                    SigmaID = y.ID,
+                    ImageID = y.ID,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64.{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+            var vm = new SigmaDeleteViewModel();
+
+            vm.Id = sigma.Id;
+            vm.SigmaName = sigma.SigmaName;
+            vm.SigmaXP = sigma.SigmaXP;
+            vm.SigmaXPNextLevel = sigma.SigmaXPNextLevel;
+            vm.SigmaLevel = sigma.SigmaLevel;
+            vm.SigmaType = (Models.Sigmas.SigmaType)sigma.SigmaType;
+            vm.SigmaStatus = (Models.Sigmas.SigmaStatus)sigma.SigmaStatus;
+            vm.SigmaMove = sigma.SigmaMove;
+            vm.SigmaMovePower = sigma.SigmaMovePower;
+            vm.SpecialSigmaMove = sigma.SpecialSigmaMove;
+            vm.SpecialSigmaMovePower = sigma.SpecialSigmaMovePower;
+            vm.CreatedAt = sigma.CreatedAt;
+            vm.UpdatedAt = DateTime.Now;
+            vm.Image.AddRange(images);
+
+            return View(vm);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var sigmaToDelete = await _sigmasServices.Delete(id);
+
+            if (sigmaToDelete == null) { return RedirectToAction("Index"); }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(SigmaImageViewModel vm)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                ID = vm.ImageID
+            };
+            var image = await _fileServices.RemoveImageFromDatabase(dto);
+            if (image == null) { return RedirectToAction("Index");  }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -14,5 +14,6 @@ namespace Looksmaxxing.Core.ServiceInterface
 
         Task<Sigma> Create(SigmaDto dto);
         Task<Sigma> Update(SigmaDto dto);
+        Task<Sigma> Delete(Guid id);
     }
 }

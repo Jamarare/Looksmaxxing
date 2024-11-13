@@ -11,5 +11,7 @@ namespace Looksmaxxing.Core.ServiceInterface
     public interface IFileServices
     {
         void UploadFilesToDatabase(SigmaDto dto, Sigma domain);
+
+        Task<FileToDatabase> RemoveImageFromDatabase(FileToDatabaseDto dto);
     }
 }

@@ -32,7 +32,9 @@
                    <td>@sigma.SigmaType</td>
                    <td>@sigma.SigmaLevel</td>
                    <td>
-                       <a asp-action="details" asp-controller="sigmas" asp-route-id="@sigma.Id" class="btn btn-info">SigmaDetails</a>
+                       <a asp-action="details" asp-controller="sigmas" asp-route-id="@sigma.Id" class="btn btn-info">SigmaDetails</a> <br />
+                        <a asp-action="update" asp-controller="sigmas" asp-route-id="@sigma.Id" class="btn btn-info">SigmaConfigure</a> <br />
+                        <a asp-action="delete" asp-controller="sigmas" asp-route-id="@sigma.Id" class="btn btn-info">SigmaDelete</a>
                    </td>
                 </tr>
                 rowNumber++;

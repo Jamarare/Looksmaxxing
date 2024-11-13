@@ -102,5 +102,15 @@ namespace Looksmaxxing.ApplicationServices.Services
 
             return sigma;
         }
+
+        public async Task<Sigma> Delete(Guid id)
+        {
+            var result = await _context.Sigmas
+                .FirstOrDefaultAsync(x => x.Id == id);
+            _context.Sigmas.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
     }
 }

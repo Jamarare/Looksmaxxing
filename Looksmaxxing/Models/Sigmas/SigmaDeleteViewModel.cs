@@ -1,6 +1,6 @@
 ﻿namespace Looksmaxxing.Models.Sigmas
 {
-    public class SigmaDetailsViewModel
+    public class SigmaDeleteViewModel
     {
         public Guid? Id { get; set; }
 
@@ -27,5 +27,9 @@
         //public List<IFormFile> Files { get; set; }
 
         public List<SigmaImageViewModel> Image { get; set; } = new List<SigmaImageViewModel>();
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
     }
 }
