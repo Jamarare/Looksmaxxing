@@ -248,7 +248,7 @@ namespace Looksmaxxing.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveImage(SigmaImageViewModel vm)
         {
-            var dto = new FileToDatabaseDto()
+            var dto = new FileToDatabaseDto() 
             {
                 ID = vm.ImageID
             };

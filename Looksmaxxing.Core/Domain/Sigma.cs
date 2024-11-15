@@ -8,7 +8,7 @@ namespace Looksmaxxing.Core.Domain
 {
     public enum SigmaType
     {
-        Alpha, Beta, Looksmaxxer, Ultra, Unknown
+        Alpha, Beta, Looksmaxxer, Ultra, Unknown,
     }
 
     public enum SigmaStatus
