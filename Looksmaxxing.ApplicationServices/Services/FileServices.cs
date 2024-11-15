@@ -65,5 +65,5 @@ namespace Looksmaxxing.ApplicationServices.Services
 
             return null;
         }
-    }
+    } 
 }
