@@ -1,4 +1,5 @@
 ﻿using Looksmaxxing.Core.Domain;
+using Looksmaxxing.Core.ServiceInterface;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

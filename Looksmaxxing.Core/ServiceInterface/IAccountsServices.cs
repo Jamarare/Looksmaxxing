@@ -8,5 +8,6 @@ namespace Looksmaxxing.Core.ServiceInterface
 {
     public interface IAccountsServices
     {
+
     }
 }
