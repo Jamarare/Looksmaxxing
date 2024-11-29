@@ -1,4 +1,4 @@
-﻿@model Looksmaxxing.Models.Cities.IndexViewModel
+﻿@model IEnumerable<Looksmaxxing.Models.Cities.IndexViewModel>
 @{
 	int rowNumber = 1;
 }
@@ -20,16 +20,14 @@
 			@foreach (var city in Model)
 			{
 				<tr>
-					<td>@rowNumber</td>
-					<td>@Html.DisplayNameFor(model => model.Name)</td>
-					<td>@Html.DisplayNameFor(model => model.Difficulty)</td>
-					<td>@Html.DisplayNameFor(model => model.SigmaLevelRequirement)</td>
+					<td>@city.ID</td>
+					<td>@city.Name</td>
+					<td>@city.Difficulty</td>
+					<td>@city.SigmaLevelRequirement</td>
 					<td>
-						<a asp-action="details" asp-controller="cities" asp-route-id="@city.ID" class="btn btn-info">Details</a>
-						<br />
-						<a asp-action="update" asp-controller="cities" asp-route-id="@city.ID" class="btn btn-info">Configure</a>
-						<br />
-						<a asp-action="delete" asp-controller="cities" asp-route-id="@city.ID" class="btn btn-info">Delete</a>
+						<a asp-action="details" asp-route-id="@city.ID" class="btn btn-info">Details</a>
+						<a asp-action="update" asp-route-id="@city.ID" class="btn btn-info">Update</a>
+						<a asp-action="delete" asp-route-id="@city.ID" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 				rowNumber++;

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Looksmaxxing.ApplicationServices.Services
 {
-    public class CitiesServices
+    public class CitiesServices : ICitiesServices
     {
         private readonly LooksmaxxingContext _cities;
         private readonly LooksmaxxingContext _context;
@@ -30,6 +30,7 @@ namespace Looksmaxxing.ApplicationServices.Services
                 .FirstOrDefaultAsync(x => x.ID == id);
             return result;
         }
+
         public async Task<City> Create(CityDto dto)
         {
             City city = new();

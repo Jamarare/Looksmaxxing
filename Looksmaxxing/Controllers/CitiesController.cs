@@ -32,11 +32,17 @@ namespace Looksmaxxing.Controllers
                 {
                     ID = x.ID,
                     Name = x.Name,
-                    Difficulty = (Models.Cities.Difficulty)x.Difficulty,
+                    Difficulty = (Models.Cities.Difficulty)x.Difficulty, // Cast the difficulty enum
                     SigmaLevelRequirement = x.SigmaLevelRequirement,
-                });
-            return View(resultingInventory);
+                })
+                .ToList(); // Convert to list to pass to the view
+
+            return View(resultingInventory); // Make sure you pass a collection of IndexViewModel
         }
+
+
+
+
 
         [HttpGet]
         public IActionResult Create()
