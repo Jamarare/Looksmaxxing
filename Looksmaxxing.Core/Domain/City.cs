@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Looksmaxxing.Core.Domain
+﻿namespace Looksmaxxing.Core.Domain
 {
-    internal class City
+
+    public enum Difficulty
     {
+        Eazy, Normal, Hard, Insane
+    }
+
+    public class City
+    {
+        public Guid ID { get; set; }
+        public string Name { get; set; }
+        public Difficulty Difficulty { get; set; }
+        public int SigmaLevelRequirement { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

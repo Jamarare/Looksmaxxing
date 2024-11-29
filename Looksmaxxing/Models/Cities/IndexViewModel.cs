@@ -1,6 +1,11 @@
 ﻿namespace Looksmaxxing.Models.Cities
 {
-    public class CreateViewModel
+    public enum Difficulty
+    {
+        Eazy, Normal, Hard, Insane
+    }
+
+    public class IndexViewModel
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
