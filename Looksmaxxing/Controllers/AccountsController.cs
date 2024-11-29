@@ -132,6 +132,7 @@ namespace Looksmaxxing.Controllers
                 Token = token,
                 Email = user.Email
             };
+            return View(model);
         }
 
         [HttpPost]
@@ -168,6 +169,13 @@ namespace Looksmaxxing.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
@@ -177,7 +185,7 @@ namespace Looksmaxxing.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
@@ -189,19 +197,22 @@ namespace Looksmaxxing.Controllers
                 if (result.Succeeded)
                 {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
                     var confirmationLink = Url.Action("ConfirmEmail", "Accounts", new { userId = user.Id, token = token }, Request.Scheme);
                     if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administrations");
                     }
-
-                    ViewBag.ErrorTitle = "You have succesfully registered";
+                    ViewBag.ErrorTitle = "You have successfully registered";
                     ViewBag.ErrorMessage = "Before you can log in, please confirm email from the link" +
                         "\nwe have emailed to your email address.";
                     return View("Error");
                 }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
+            return View();
         }
 
         [HttpGet]
