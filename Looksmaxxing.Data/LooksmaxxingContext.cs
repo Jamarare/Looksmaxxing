@@ -12,7 +12,7 @@ namespace Looksmaxxing.Data
     {
         public LooksmaxxingContext(DbContextOptions<LooksmaxxingContext> options) : base(options) {}
         public DbSet<Sigma> Sigmas { get; set; }
-
         public DbSet<FileToDatabase> FilesToDatabase { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }
