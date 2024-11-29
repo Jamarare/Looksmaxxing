@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISigmasServices, SigmasServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
+builder.Services.AddScoped<ICitiesServices, CitiesServices>();
 
 builder.Services.AddDbContext<LooksmaxxingContext>(
     Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
