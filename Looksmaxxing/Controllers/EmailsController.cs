@@ -1,4 +1,6 @@
-﻿using Looksmaxxing.Core.Dto;
+﻿using Looksmaxxing.ApplicationServices.Services;
+using Looksmaxxing.Core.Dto;
+using Looksmaxxing.Core.ServiceInterface;
 using Looksmaxxing.Models.Emails;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +8,11 @@ namespace Looksmaxxing.Controllers
 {
     public class EmailsController : Controller
     {
-        private readonly IEmailsServices _emailServices;
+        private readonly IEmailsServices _emailsServices;
 
         public EmailsController(IEmailsServices emailServices)
         {
-            _emailServices = emailServices;
+            _emailsServices = emailServices;
         }
 
         public IActionResult Index()
@@ -27,7 +29,20 @@ namespace Looksmaxxing.Controllers
                 Subject = viewModel.Subject,
                 Body = viewModel.Body,
             };
-            _emailServices.SendEmail(dto);
+            _emailsServices.SendEmail(dto);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public IActionResult SendTokenEmail(EmailViewModel viewModel, string token)
+        {
+            var dto = new EmailTokenDto()
+            {
+                To = viewModel.To,
+                Subject = viewModel.Subject,
+                Body = viewModel.Body,
+                Token = token
+            };
+            _emailsServices.SendEmailToken(dto, token);
             return RedirectToAction(nameof(Index));
         }
     }

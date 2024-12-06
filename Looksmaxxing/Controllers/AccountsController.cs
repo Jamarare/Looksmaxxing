@@ -1,4 +1,7 @@
-﻿using Looksmaxxing.Core.Domain;
+﻿using Looksmaxxing.ApplicationServices.Services;
+using Looksmaxxing.Core.Domain;
+using Looksmaxxing.Core.Dto;
+using Looksmaxxing.Core.ServiceInterface;
 using Looksmaxxing.Data;
 using Looksmaxxing.Models;
 using Looksmaxxing.Models.Accounts;
@@ -14,16 +17,19 @@ namespace Looksmaxxing.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly LooksmaxxingContext _context;
+        private readonly IEmailsServices _emailsServices;
 
         public AccountsController
             (UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            LooksmaxxingContext context
+            LooksmaxxingContext context,
+            IEmailsServices emailsServices
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _emailsServices = emailsServices;
         }
         [HttpGet]
         public async Task<IActionResult> AddPassword()
@@ -201,6 +207,12 @@ namespace Looksmaxxing.Controllers
                 {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var confirmationLink = Url.Action("ConfirmEmail", "Accounts", new { userId = user.Id, token = token }, Request.Scheme);
+                    EmailTokenDto newsignup = new();
+                    newsignup.Token = token;
+                    newsignup.Body = $"Thank you for signing up, klikka här:  {confirmationLink}";
+                    newsignup.Subject = "GalacticTitans Register";
+                    newsignup.To = user.Email;
+                    _emailsServices.SendEmailToken(newsignup, token);
                     if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administrations");

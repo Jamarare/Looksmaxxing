@@ -2,7 +2,7 @@
 
 namespace Looksmaxxing.Security
 {
-    public class CustomEmailConfirmationTokenProviderOptions
+    public class CustomEmailConfirmationTokenProviderOptions : DataProtectionTokenProviderOptions
     {
     }
 }

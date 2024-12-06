@@ -1,4 +1,5 @@
 ﻿using Looksmaxxing.Core.Domain;
+using Looksmaxxing.Core.Dto;
 using Looksmaxxing.Core.Dto.AccountsDtos;
 using Looksmaxxing.Core.ServiceInterface;
 using Microsoft.AspNetCore.Identity;
@@ -14,15 +15,18 @@ namespace Looksmaxxing.ApplicationServices.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailsServices _emailsServices;
 
         public AccountsServices
             (
                 UserManager<ApplicationUser> userManager,
-                SignInManager<ApplicationUser> signInManager
+                SignInManager<ApplicationUser> signInManager,
+                IEmailsServices emailsServices
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailsServices = emailsServices;
         }
 
         public async Task<ApplicationUser> Register(ApplicationUserDto dto)
@@ -37,6 +41,7 @@ namespace Looksmaxxing.ApplicationServices.Services
             if (result.Succeeded)
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                _emailsServices.SendEmailToken(new EmailTokenDto(), token);
             }
             return user;
         }

@@ -13,7 +13,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISigmasServices, SigmasServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
 builder.Services.AddScoped<IAccountsServices, AccountsServices>();
-
+builder.Services.AddScoped<IEmailsServices, EmailsServices>();
+builder.Services.AddScoped<IAccountsServices, AccountsServices>();
 builder.Services.AddDbContext<LooksmaxxingContext>(
     Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
