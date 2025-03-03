@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using Looksmaxxing.Core.Domain;
 using Looksmaxxing.Core.Dto;
 using Looksmaxxing.Core.ServiceInterface;
@@ -13,9 +9,8 @@ namespace Looksmaxxing.ApplicationServices.Services
 {
     public class CitiesServices : ICitiesServices
     {
-        private readonly LooksmaxxingContext _cities;
         private readonly LooksmaxxingContext _context;
-        private readonly ICitiesServices _services;
+        private readonly ICitiesServices _citiesServices;
         private readonly IFileServices _fileServices;
 
 

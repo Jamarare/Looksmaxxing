@@ -13,6 +13,7 @@ namespace Looksmaxxing.Core.ServiceInterface
         void UploadFilesToDatabase(SigmaDto dto, Sigma domain);
 
 
+
         Task<FileToDatabase> RemoveImageFromDatabase(FileToDatabaseDto dto);
     }
 }
