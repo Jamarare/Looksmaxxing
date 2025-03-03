@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Looksmaxxing.Data
 {
-    public class LooksmaxxingContext : DbContext
+    public class LooksmaxxingContext : IdentityDbContext<ApplicationUser>
     {
         public LooksmaxxingContext(DbContextOptions<LooksmaxxingContext> options) : base(options) {}
         public DbSet<Sigma> Sigmas { get; set; }

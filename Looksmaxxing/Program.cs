@@ -1,6 +1,8 @@
 using Looksmaxxing.ApplicationServices.Services;
+using Looksmaxxing.Core.Domain;
 using Looksmaxxing.Core.ServiceInterface;
 using Looksmaxxing.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISigmasServices, SigmasServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
 builder.Services.AddScoped<ICitiesServices, CitiesServices>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<LooksmaxxingContext>()
+    .AddDefaultTokenProviders();
+
 
 
 builder.Services.AddDbContext<LooksmaxxingContext>(

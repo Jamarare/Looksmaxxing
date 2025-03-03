@@ -104,6 +104,51 @@ namespace Looksmaxxing.Controllers
             return View(vm);
         }
 
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var city = await _context.Cities.FindAsync(id);
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new UpdateViewModel
+            {
+                ID = city.ID,
+                Name = city.Name
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(Guid id, UpdateViewModel model)
+        {
+            if (id != model.ID)
+            {
+                return NotFound();
+            }
+
+            var city = await _context.Cities.FindAsync(id);
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            city.Name = model.Name;
+
+            _context.Update(city);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -128,11 +173,10 @@ namespace Looksmaxxing.Controllers
                 ImageTitle = y.ImageTitle,
                 Image = string.Format("data:image/gif;base64{0}", Convert.ToBase64String(y.ImageData))
             }).ToArrayAsync();
-            var vm = new DetailsViewModel();
+            var vm = new DeleteViewModel();
             vm.Name = vm.Name;
             vm.Difficulty = vm.Difficulty;
             vm.SigmaLevelRequirement = vm.SigmaLevelRequirement;
-            vm.Files = vm.Files;
             return View(vm);
         }
         [HttpPost]
