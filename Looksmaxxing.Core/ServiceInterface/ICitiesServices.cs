@@ -12,5 +12,6 @@ namespace Looksmaxxing.Core.ServiceInterface
     {
         Task<City> Create(CityDto dto);
         Task<City> DetailsAsync(Guid id);
+        Task<City> Delete(Guid id);
     }
 }

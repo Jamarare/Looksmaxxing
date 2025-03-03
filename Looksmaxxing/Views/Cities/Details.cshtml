@@ -1,0 +1,43 @@
+﻿@model Looksmaxxing.Models.Cities.DetailsViewModel
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<div class="row">
+	<h4>City Details</h4>
+	<hr />
+	<dl class="row">
+		<div class="form-group-row">
+			<label asp-for="Id" class="col-sm-2 col-form-label"></label>
+			@Html.DisplayFor(model => model.Id)
+		</div>
+		<div class="form-group-row">
+			<label asp-for="Name" class="col-sm-2 col-form-label"></label>
+			@Html.DisplayFor(model => model.Name)
+		</div>
+
+		<div id="imagediv">
+			@foreach (var image in Model.Image)
+			{
+				<partial name="_Images" model="image" />
+			}
+		</div>
+
+		<div class="form-group row">
+			<label asp-for="Difficulty" class="col-sm-2 col-form-label"></label>
+			@Html.DisplayFor(model => model.Difficulty)
+		</div>
+		<div class="form-group row">
+			<label asp-for="SigmaLevelRequirement" class="col-sm-2 col-form-label"></label>
+			@Html.DisplayFor(model => model.SigmaLevelRequirement)
+		</div>
+		<div class="form-group row">
+			<label asp-for="Image" class="col-sm-2 col-form-label"></label>
+			@Html.DisplayFor(model => model.Image)
+		</div>
+	</dl>
+</div>
+<form asp-action="DeleteConfirmation">
+	<input type="hidden" asp-for="Id" />
+	<input type="submit" value="Delete" class="btn btn-danger" />
+	<a asp-action="Index" asp-controller="cities" class="btn btn-secondary danger">Return</a>
+</form>

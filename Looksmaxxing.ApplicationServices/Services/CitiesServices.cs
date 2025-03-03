@@ -37,5 +37,13 @@ namespace Looksmaxxing.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return city;
         }
+
+        public async Task<City> Delete (Guid id)
+        {
+            var result = await _context.Cities.FirstOrDefaultAsync(x => x.ID == id);
+            _context.Cities.Remove(result);
+            await _context.SaveChangesAsync();
+            return result;
+        }
     }
 }

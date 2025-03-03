@@ -40,10 +40,6 @@ namespace Looksmaxxing.Controllers
             return View(resultingInventory);
         }
 
-
-
-
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -74,6 +70,79 @@ namespace Looksmaxxing.Controllers
             }
 
             return RedirectToAction("Index", vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var City = await _citiesServices.DetailsAsync(id);
+
+            if (City == null)
+            {
+                return NotFound();
+            }
+
+            var images = await _context.FilesToDatabase
+            .Where(c => c.SigmaID == id)
+            .Select(y => new ImageViewModel
+            {
+                CityID = y.ID,
+                ImageID = y.ID,
+                ImageData = y.ImageData,
+                ImageTitle = y.ImageTitle,
+                Image = string.Format("data:image/gif;base64{0}", Convert.ToBase64String(y.ImageData))
+            }).ToArrayAsync();
+            var vm = new DetailsViewModel();
+            vm.Name = vm.Name;
+            vm.Difficulty = vm.Difficulty;
+            vm.SigmaLevelRequirement = vm.SigmaLevelRequirement;
+            vm.Files = vm.Files;
+            return View(vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var City = await _citiesServices.DetailsAsync(id);
+
+            if (City == null)
+            {
+                return NotFound();
+            }
+
+            var images = await _context.FilesToDatabase
+            .Where(c => c.SigmaID == id)
+            .Select(y => new ImageViewModel
+            {
+                CityID = y.ID,
+                ImageID = y.ID,
+                ImageData = y.ImageData,
+                ImageTitle = y.ImageTitle,
+                Image = string.Format("data:image/gif;base64{0}", Convert.ToBase64String(y.ImageData))
+            }).ToArrayAsync();
+            var vm = new DetailsViewModel();
+            vm.Name = vm.Name;
+            vm.Difficulty = vm.Difficulty;
+            vm.SigmaLevelRequirement = vm.SigmaLevelRequirement;
+            vm.Files = vm.Files;
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var cityToDelete = await _citiesServices.Delete(id);
+
+            if (cityToDelete == null) { return RedirectToAction("Index"); }
+
+            return RedirectToAction("Index");
         }
     }
 }
